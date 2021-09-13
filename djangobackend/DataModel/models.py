@@ -22,3 +22,10 @@ class Station(models.Model):
         latitude = models.TextField(max_length=50, blank=False, null=False)
         longitude = models.TextField(max_length=50, blank=False, null=False)
 
+class Booking(models.Model):
+        booking_id= models.AutoField(primary_key=True, blank=False, null=False)
+        station_id = models.TextField(max_length=30, blank=False, null=False)
+        user_id = models.TextField(max_length=15, blank=False, null=False)
+        date = models.TextField(max_length=20, blank=False, null=False)
+        time = models.TextField(max_length=10, blank=False, null=False)
+        status = models.TextField(max_length=20, blank=False, null=False)
