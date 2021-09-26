@@ -1,4 +1,6 @@
+from re import VERBOSE
 from django.db import models
+from django.db.models.deletion import CASCADE
 
 # Create your models here.
 class AppUser(models.Model):
@@ -24,8 +26,8 @@ class Station(models.Model):
 
 class Booking(models.Model):
         booking_id= models.AutoField(primary_key=True, blank=False, null=False)
-        station_id = models.TextField(max_length=30, blank=False, null=False)
-        user_id = models.TextField(max_length=15, blank=False, null=False)
+        station_id = models.ForeignKey(Station, on_delete=CASCADE, db_column='station_id')
+        user_id =  models.ForeignKey(AppUser, on_delete=CASCADE, db_column='user_id')
         date = models.TextField(max_length=20, blank=False, null=False)
         time = models.TextField(max_length=10, blank=False, null=False)
-        status = models.TextField(max_length=20, blank=False, null=False)
+        status = models.TextField(max_length=20, blank=False, default='Open')

@@ -15,9 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework.schemas.views import SchemaView
 from DataModel.router import router
+from DataModel import views
+
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('chargePoint/', include(router.urls))
+    path('chargePoint/', include(router.urls)),
+    path('chargePoint/validateUser/',views.userValidate),
+    path('chargePoint/getStationsByPincode/',views.fetchStationsByPincode),
+    path('chargePoint/getMyBookingInfo/',views.fetchBookingByUser),
 ]
