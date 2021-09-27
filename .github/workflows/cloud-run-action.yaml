@@ -34,5 +34,4 @@ jobs:
           --image asia.gcr.io/${{ secrets.GCP_PROJECT_ID }}/chargepointapi:latest \
           --platform managed \
           --allow-unauthenticated \
-          --port 80 \
           --project ${{ secrets.GCP_PROJECT_ID }}
