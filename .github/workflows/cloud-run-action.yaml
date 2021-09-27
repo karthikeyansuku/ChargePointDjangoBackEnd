@@ -29,7 +29,7 @@ jobs:
 
       - name: Deploy
         run: |
-          gcloud run deploy ChargePointBackendAPI \
+          gcloud run deploy chargepointapi \
           --region europe-west1 \
           --image asia.gcr.io/${{ secrets.GCP_PROJECT_ID }}/chargepointapi:latest \
           --platform managed \
