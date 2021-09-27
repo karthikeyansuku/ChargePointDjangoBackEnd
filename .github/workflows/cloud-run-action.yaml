@@ -34,7 +34,7 @@ jobs:
       - name: Deploy
         run: |
           gcloud run deploy chargepointdjango \
-          --region europe-west1 \
+          --region asia-southeast1 \
           --image gcr.io/${{ secrets.GCP_PROJECT_ID }}/chargepointdjango \
           --platform managed \
           --allow-unauthenticated \
