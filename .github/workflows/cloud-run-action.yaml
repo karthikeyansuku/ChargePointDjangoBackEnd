@@ -24,8 +24,8 @@ jobs:
       
       - name: Build & Publish
         run: |
-         docker build -t gcr.io/${{ secrets.GCP_PROJECT_ID }}/ChargePointBackendAPI:latest .
-         docker push gcr.io/${{ secrets.GCP_PROJECT_ID }}/ChargePointBackendAPI:latest
+         docker build -t gcr.io/${{ secrets.GCP_PROJECT_ID }}:latest .
+         docker push gcr.io/${{ secrets.GCP_PROJECT_ID }}:latest
 
       - name: Deploy
         run: |
