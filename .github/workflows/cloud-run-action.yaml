@@ -1,20 +1,19 @@
-name: publish
-
-on: [push]
-
+name: cloudrun-deploy
+on:
+  push:
+    branches:
+      - main
 jobs:
-  build:
-    name: Cloud Run Deployment
+  setup-build-publish-deploy:
+    name: Setup, Build, Publish, and Deploy
     runs-on: ubuntu-latest
     steps:
-
       - name: Checkout
-        uses: google-github-actions/setup-gcloud@master
+        uses: actions/checkout@master
 
-      - name: Setup GCP Service Account
-        uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+        # Setup gcloud CLI
+      - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
         with:
-          version: 'latest'
           service_account_email: ${{ secrets.GCP_SA_EMAIL }}
           service_account_key: ${{ secrets.GCP_SA_KEY }}
           export_default_credentials: true
@@ -23,19 +22,15 @@ jobs:
         run: |
           gcloud auth configure-docker
       
-      - name: Build
+      - name: Build & Publish
         run: |
-          docker build -t gcr.io/${{ secrets.GCP_PROJECT_ID }}/chargepointdjango:latest .
-
-      - name: Push
-        run: |
-          docker push gcr.io/${{ secrets.GCP_PROJECT_ID }}/chargepointdjango:latest
+          gcloud config set project ${{ secrets.GCP_PROJECT_ID }}
+          gcloud builds submit --tag gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_APPLICATION }}
+          gcloud config set run/region asia-southeast1
 
       - name: Deploy
         run: |
-          gcloud run deploy chargepointdjango \
-          --region asia-southeast1 \
-          --image gcr.io/${{ secrets.GCP_PROJECT_ID }}/chargepointdjango \
+          gcloud run deploy ${{ secrets.GCP_APPLICATION }} --image gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_APPLICATION }} \
           --platform managed \
           --allow-unauthenticated \
-          --project ${{ secrets.GCP_PROJECT_ID }}
+          --memory 512M
