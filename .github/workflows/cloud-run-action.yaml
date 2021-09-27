@@ -24,14 +24,14 @@ jobs:
       
       - name: Build & Publish
         run: |
-         docker build -t gcr.io/${{ secrets.GCP_PROJECT_ID }}:latest .
-         docker push gcr.io/${{ secrets.GCP_PROJECT_ID }}:latest
+         docker build -t asia.gcr.io/${{ secrets.GCP_PROJECT_ID }}/chargepointapi:latest .
+         docker push asia.gcr.io/${{ secrets.GCP_PROJECT_ID }}/chargepointapi:latest .
 
       - name: Deploy
         run: |
           gcloud run deploy ChargePointBackendAPI \
           --region europe-west1 \
-          --image gcr.io/${{ secrets.GCP_PROJECT_ID }}/ChargePointBackendAPI \
+          --image asia.gcr.io/${{ secrets.GCP_PROJECT_ID }}/chargepointapi:latest \
           --platform managed \
           --allow-unauthenticated \
           --project ${{ secrets.GCP_PROJECT_ID }}
