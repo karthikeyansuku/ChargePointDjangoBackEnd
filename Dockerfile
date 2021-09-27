@@ -4,3 +4,6 @@ WORKDIR /djangobackend
 COPY requirements.txt /djangobackend/
 RUN pip install -r requirements.txt
 COPY . /djangobackend/
+ENV PORT 8000
+ENV HOST 0.0.0.0
+EXPOSE 8000
