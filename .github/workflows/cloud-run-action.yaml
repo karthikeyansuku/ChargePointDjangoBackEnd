@@ -35,7 +35,7 @@ jobs:
           --image asia.gcr.io/${{ secrets.GCP_PROJECT_ID }}/chargepointapi:latest \
           --allow-unauthenticated \
           --project ${{ secrets.GCP_PROJECT_ID }}
-          --port 8000
+          --port 8000:8000
       # - name: Run
       #   run: |
       #     sudo docker-compose run web django-admin startproject 
