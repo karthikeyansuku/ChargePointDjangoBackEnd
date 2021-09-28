@@ -30,7 +30,7 @@ jobs:
       - name: Deploy
         run: |
           gcloud run deploy chargepointapi \
-          --platform managed
+          --platform managed \
           --region asia-south1 \
           --image asia.gcr.io/${{ secrets.GCP_PROJECT_ID }}/chargepointapi:latest \
           --allow-unauthenticated \
