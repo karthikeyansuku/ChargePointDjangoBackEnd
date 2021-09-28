@@ -9,6 +9,7 @@ web_migrate:
   extends:
     service: web
   command: python manage.py migrate
+  env_file: .env-local
 web_run:
   extends:
     service: web

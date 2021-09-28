@@ -1,5 +1,5 @@
 cd src
-python manage.py shell < init_admin.py
+# python manage.py shell < init_admin.py
 python manage.py makemigrations
 python manage.py migrate
 
