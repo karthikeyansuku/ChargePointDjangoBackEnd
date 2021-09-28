@@ -22,7 +22,7 @@ jobs:
         run: |
           gcloud auth configure-docker
       
-      - name: Build & Publish
+      - name: Build & Push
         run: |
          docker build -t asia.gcr.io/${{ secrets.GCP_PROJECT_ID }}/chargepointapi:latest .
          docker push asia.gcr.io/${{ secrets.GCP_PROJECT_ID }}/chargepointapi:latest
@@ -35,6 +35,7 @@ jobs:
           --image asia.gcr.io/${{ secrets.GCP_PROJECT_ID }}/chargepointapi:latest \
           --allow-unauthenticated \
           --project ${{ secrets.GCP_PROJECT_ID }}
+          --port 8000:8000
       # - name: Run
       #   run: |
       #     sudo docker-compose run web django-admin startproject 
