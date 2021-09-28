@@ -34,6 +34,7 @@ jobs:
           --region asia-south1 \
           --image asia.gcr.io/${{ secrets.GCP_PROJECT_ID }}/chargepointapi:latest \
           --allow-unauthenticated \
+          --project ${{ secrets.GCP_PROJECT_ID }}
       # - name: Run
       #   run: |
       #     sudo docker-compose run web django-admin startproject 
