@@ -5,7 +5,7 @@ on:
       - main
 jobs:
   setup-build-publish-deploy:
-    name: Google cloud -Setup, Build, Publish, and Deploy
+    name: Google cloud Setup--Checkout, Build, Publish, and Deploy
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -28,14 +28,14 @@ jobs:
          docker push asia.gcr.io/${{ secrets.GCP_PROJECT_ID }}/chargepointapi:latest
       - name: Deploy
         run: |
-          # gcloud run deploy chargepointapi \
-          # --platform managed \
-          # --region asia-south1 \
-          # --image asia.gcr.io/${{ secrets.GCP_PROJECT_ID }}/chargepointapi:latest \
-          # --allow-unauthenticated \
-          # --project ${{ secrets.GCP_PROJECT_ID }}
-          # --port 80:8000
-          docker run --publish 8000:8000 asia.gcr.io/${{ secrets.GCP_PROJECT_ID }}/chargepointapi:latest
+          gcloud run deploy chargepointapi \
+          --platform managed \
+          --region asia-south1 \
+          --image asia.gcr.io/${{ secrets.GCP_PROJECT_ID }}/chargepointapi:latest \
+          --allow-unauthenticated \
+          --project ${{ secrets.GCP_PROJECT_ID }}
+          --port 80:8000
+          #docker run --publish 8000:8000 asia.gcr.io/${{ secrets.GCP_PROJECT_ID }}/chargepointapi:latest
 
       # - name: Run
       #   run: |
