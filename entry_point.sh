@@ -1,6 +1,4 @@
 #!/bin/sh
-
-cd djangobackend
 python manage.py shell
 python manage.py makemigrations
 python manage.py migrate
