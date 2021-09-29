@@ -2,7 +2,7 @@
 web:
   build: .
   environment:
-    MYENV: EXAMPLE
+    MYENV: prod
   volumes:
     - .:/djangobackend
 web_migrate:
