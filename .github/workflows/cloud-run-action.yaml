@@ -1,8 +1,8 @@
-name: cloudrun-deploy
+name: cloudrun-Prod-deploy
 on:
   push:
     branches:
-      - main
+      - master
 jobs:
   setup-build-publish-deploy:
     name: Google cloud Setup--Checkout, Build, Publish, and Deploy
@@ -34,7 +34,7 @@ jobs:
           --image asia.gcr.io/${{ secrets.GCP_PROJECT_ID }}/chargepointapi:latest \
           --allow-unauthenticated \
           --project ${{ secrets.GCP_PROJECT_ID }} \
-          --port 8000
+          --port ${{ secrets.DJANGO_PORT}}
           
       #docker run --publish 8000:8000 asia.gcr.io/${{ secrets.GCP_PROJECT_ID }}/chargepointapi:latest
 
