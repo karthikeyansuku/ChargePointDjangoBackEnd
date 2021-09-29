@@ -2,7 +2,7 @@ name: cloudrun-deploy
 on:
   push:
     branches:
-      - master
+      - main
 jobs:
   setup-build-publish-deploy:
     name: Google cloud -Setup, Build, Publish, and Deploy
@@ -24,18 +24,19 @@ jobs:
       
       - name: Build & Push
         run: |
-         docker build . -t asia.gcr.io/${{ secrets.GCP_PROJECT_ID }}/chargepointapi:latest
+         docker build -t asia.gcr.io/${{ secrets.GCP_PROJECT_ID }}/chargepointapi:latest .
          docker push asia.gcr.io/${{ secrets.GCP_PROJECT_ID }}/chargepointapi:latest
-        #  docker run -it -p 80:8000 asia.gcr.io/${{ secrets.GCP_PROJECT_ID }}/chargepointapi:latest
       - name: Deploy
         run: |
-          gcloud run deploy chargepointapi \
-          --platform managed \
-          --region asia-south1 \
-          --image asia.gcr.io/${{ secrets.GCP_PROJECT_ID }}/chargepointapi:latest \
-          --allow-unauthenticated \
-          --project ${{ secrets.GCP_PROJECT_ID }}
-          --port 80:8000
+          # gcloud run deploy chargepointapi \
+          # --platform managed \
+          # --region asia-south1 \
+          # --image asia.gcr.io/${{ secrets.GCP_PROJECT_ID }}/chargepointapi:latest \
+          # --allow-unauthenticated \
+          # --project ${{ secrets.GCP_PROJECT_ID }}
+          # --port 80:8000
+          docker run --publish -p 8000:8000 asia.gcr.io/${{ secrets.GCP_PROJECT_ID }}/chargepointapi:latest
+
       # - name: Run
       #   run: |
       #     sudo docker-compose run web django-admin startproject 
