@@ -34,7 +34,7 @@ jobs:
           --image asia.gcr.io/${{ secrets.GCP_PROJECT_ID }}/chargepointapi:latest \
           --allow-unauthenticated \
           --project ${{ secrets.GCP_PROJECT_ID }} \
-          --port 80:8000
+          --port 8000
           
       #docker run --publish 8000:8000 asia.gcr.io/${{ secrets.GCP_PROJECT_ID }}/chargepointapi:latest
 
