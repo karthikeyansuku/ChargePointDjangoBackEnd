@@ -1,5 +1,7 @@
-cd src
-python manage.py shell < init_admin.py
+#!/bin/sh
+
+cd djangobackend
+python manage.py shell
 python manage.py makemigrations
 python manage.py migrate
 
