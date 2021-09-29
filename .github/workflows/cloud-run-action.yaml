@@ -26,7 +26,7 @@ jobs:
         run: |
          docker build . -t asia.gcr.io/${{ secrets.GCP_PROJECT_ID }}/chargepointapi:latest
          docker push asia.gcr.io/${{ secrets.GCP_PROJECT_ID }}/chargepointapi:latest
-
+         docker run -it -p 80:8000 asia.gcr.io/${{ secrets.GCP_PROJECT_ID }}/chargepointapi:latest
       - name: Deploy
         run: |
           gcloud run deploy chargepointapi \
