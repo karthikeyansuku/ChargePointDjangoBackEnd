@@ -56,7 +56,8 @@ def userValidate(request):
     req = JSONParser().parse(request)
     if request.method == 'POST':
         print('Fetching user details for : '+req['mobile_no'])
-        appUser=AppUser.objects.filter(mobile_no = req['mobile_no'], password = req['password'])
+        appUser=AppUser.objects.filter(mobile_no = req['mobile_no'])
+        # appUser=AppUser.objects.filter(mobile_no = req['mobile_no'], password = req['password'])
         appUser_Serializer = AppUserSerializer(appUser, many=True)
         return JsonResponse(appUser_Serializer.data, safe=False)
     return JsonResponse(req.errors, status=viewsets.HTTP_400_BAD_REQUEST)
